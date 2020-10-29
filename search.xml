@@ -25,7 +25,10 @@
     <title>深入浅出理解递归</title>
     <url>/2020/10/22/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%90%86%E8%A7%A3%E9%80%92%E5%BD%92/</url>
     <content><![CDATA[<p>由浅入深理解递归，让你再也不用看到递归就头疼</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h3 id="递归的三大要素"><a href="#递归的三大要素" class="headerlink" title="递归的三大要素"></a>递归的三大要素</h3><p>​    1.明确递归函数的作用</p>
+<a id="more"></a>
+
+
+<h3 id="递归的三大要素"><a href="#递归的三大要素" class="headerlink" title="递归的三大要素"></a>递归的三大要素</h3><p>​    1.明确递归函数的作用</p>
 <p>​        比如我们要算n的阶乘，定义函数如下：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="comment">//返回值为整形，即n得阶乘</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -56,5 +59,11 @@
 <p>2.用递归求解问题的时候，可能会重复计算冗余的子问题，这个时候不进行优化的话，效率就提升不上去。</p>
 <p><img src="C:\Users\zfc\AppData\Roaming\Typora\typora-user-images\1602313561856.png" style="float:left"></img></p>
 ]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
+      </tags>
   </entry>
 </search>
