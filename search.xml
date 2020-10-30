@@ -216,6 +216,7 @@
 <h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>1.求解递归问题的时候，一定不要深入函数内部去细想，不然搞来搞去就把自己搞凌乱了，我们只需要关注一层递归就好。</p>
 <p>2.用递归求解问题的时候，可能会重复计算冗余的子问题，这个时候不进行优化的话，效率就提升不上去。</p>
 <p><img src="/.io//blog\source_posts\递归理解\2.png"></p>
+<p><img src=" https://raw.githubusercontent.com/cjy513203427/cjy513203427.github.io/master/img/2019-06-24-Java多线程（二）：Thread类/img1.png ">&gt;</p>
 ]]></content>
       <categories>
         <category>算法</category>
