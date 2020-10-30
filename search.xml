@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/10/20/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<a id="more"></a>
+
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>深入浅出理解递归</title>
+    <url>/2020/10/22/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%90%86%E8%A7%A3%E9%80%92%E5%BD%92/</url>
+    <content><![CDATA[<p>由浅入深理解递归，让你再也不用看到递归就头疼</p>
+<a id="more"></a>
+
+
+<h3 id="递归的三大要素"><a href="#递归的三大要素" class="headerlink" title="递归的三大要素"></a>递归的三大要素</h3><p>​    1.明确递归函数的作用</p>
+<p>​        比如我们要算n的阶乘，定义函数如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="comment">//返回值为整形，即n得阶乘</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    2.寻找递归的结束条件</p>
+<p>​        递归是自己调用自己，所以我们必须要找一个退出条件，不然会一直调用自己，直到溢出，也就是要考虑当参数是啥时，我们需要把结果返回。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int f(int n)&#123;</span><br><span class="line">	if(n&lt;&#x3D;2)&#123;</span><br><span class="line">		return n;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    3.找出函数的等价关系式</p>
+<p>​        我们要寻找一个等价关系式，不断得缩小问题得规模，例如<code>f(n)=n*f(n-1)</code>:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n&lt;=<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f(n-<span class="number">1</span>)*n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="递归和递推"><a href="#递归和递推" class="headerlink" title="递归和递推"></a>递归和递推</h3><p>1.递归：递归是从上到下往下递归的，直到递归到最底层，再一层一层把值返回，不过，当n比较大的时候，例如当n=10000，那么栈空间可能会不够用。</p>
+<p>2.递推：因此，对于这种问题，我们可以考虑用自底向上的做法。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> f1=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> f2=<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">3</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        sum=f1+f2;</span><br><span class="line">        f1=f2;</span><br><span class="line">        f2=sum;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="举例论证"><a href="#举例论证" class="headerlink" title="举例论证"></a>举例论证</h3><h4 id="案例1：斐波那契数列"><a href="#案例1：斐波那契数列" class="headerlink" title="案例1：斐波那契数列"></a>案例1：斐波那契数列</h4><p>波那契数列的是这样一个数列：1、1、2、3、5、8、13、21、34….，即第一项 f(1) = 1,第二项 f(2) = 1…..,第 n 项目为 f(n) = f(n-1) + f(n-2)。求第 n 项的值是多少。 </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;<span class="comment">//函数的功能，返回值是第n项的值</span></span><br><span class="line">    <span class="keyword">if</span>（n《=<span class="number">2</span>）&#123;<span class="comment">//递归结束条件</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>；</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f(n-<span class="number">1</span>) + f(n-<span class="number">2</span>)；<span class="comment">//等价关系式</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="案例2：反转单链表"><a href="#案例2：反转单链表" class="headerlink" title="案例2：反转单链表"></a>案例2：反转单链表</h4><p> 例如链表为：1-&gt;2-&gt;3-&gt;4，反转后为 4-&gt;3-&gt;2-&gt;1 ，返回值为反转后链表头结点。</p>
+<p>递归解题思路：</p>
+<p>​    1.使用递归函数，一直递归到链表的最后一个结点，该节点就是反转后的头结点，记作newHead</p>
+<p>​    2.每次函数在返回的过程中，让当前结点的下一个结点的next指针指向当前结点</p>
+<p>​    3.同时让当前结点的next指针指向null，从而实现链表的局部反转</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span></span>&#123;<span class="comment">//函数功能，返回反转链表的头结点</span></span><br><span class="line">    <span class="keyword">if</span>(head==<span class="keyword">null</span>||head.next==<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">    ListNode newHead=reverseList(head.next);</span><br><span class="line">    head.next.next=head;</span><br><span class="line">    head.next=<span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">return</span> newHead;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\zfc\AppData\Roaming\Typora\typora-user-images\1602312993501.png" style="float:left"></img></p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>1.求解递归问题的时候，一定不要深入函数内部去细想，不然搞来搞去就把自己搞凌乱了，我们只需要关注一层递归就好。</p>
+<p>2.用递归求解问题的时候，可能会重复计算冗余的子问题，这个时候不进行优化的话，效率就提升不上去。</p>
+<p><img src="C:\Users\zfc\AppData\Roaming\Typora\typora-user-images\1602313561856.png" style="float:left"></img></p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTTP和HTTPS协议</title>
+    <url>/2020/10/29/HTTP%E5%92%8CHTTPS%E5%8D%8F%E8%AE%AE/</url>
+    <content><![CDATA[<p>详细介绍了HTTP协议和HTTPS协议，以及两者的类似与区别！</p>
+<a id="more"></a>
+
+<h1 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h1><h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>超文本传输协议，是一种无状态协议，定义了web客户端如何从web服务器请求web页面</p>
+<h2 id="2-在浏览器中键入URL的流程"><a href="#2-在浏览器中键入URL的流程" class="headerlink" title="2.在浏览器中键入URL的流程"></a>2.在浏览器中键入URL的流程</h2><p>1.浏览器向DNS服务器发出解析域名请求</p>
+<p>2.DNS将域名解析成IP地址</p>
+<p>3.根据IP地址和默认端口80，与服务器建立TCP连接</p>
+<p>5.浏览器向服务器发送HTTP请求报文，包括请求资源路径</p>
+<p>6.服务器给浏览器发送HTTP响应报文，包括响应HTML文本</p>
+<p>7.释放TCP连接</p>
+<p>8.浏览器渲染HTML页面显示</p>
+<h2 id="3-HTTP的请求报文格式"><a href="#3-HTTP的请求报文格式" class="headerlink" title="3.HTTP的请求报文格式"></a>3.HTTP的请求报文格式</h2><h3 id="1-请求行"><a href="#1-请求行" class="headerlink" title="1.请求行"></a>1.请求行</h3><p>请求方式  请求url   请求协议/版本</p>
+<p>GET/login.html  HTTP/1.1</p>
+<h3 id="2-请求头"><a href="#2-请求头" class="headerlink" title="2.请求头"></a>2.请求头</h3><p>请求头名称：请求头值</p>
+<p>*<em>Accept:**text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,</em>/*;q=0.8,application/signed-exchange;v=b3</p>
+<p><strong>Accept-Encoding:</strong> gzip, deflate, br</p>
+<p><strong>Accept-Language:</strong> zh-CN,zh;q=0.9</p>
+<p><strong>Cache-Control:</strong> max-age=0</p>
+<p><strong>Connection:</strong> keep-alive</p>
+<p><strong>Cookie:</strong> Idea-67d677bc=630663ec-7b88-46cf-87ef-e1a3f29e39ee</p>
+<p><strong>Host:</strong> localhost:8080</p>
+<p><strong>If-Modified-Since:</strong> Thu, 05 Dec 2019 07:13:30 GMT</p>
+<p><strong>If-None-Match:</strong> W/“247-1575530010804”</p>
+<p><strong>Upgrade-Insecure-Requests:</strong> 1</p>
+<p><strong>User-Agent:</strong> Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36</p>
+<h3 id="3-请求空行"><a href="#3-请求空行" class="headerlink" title="3.请求空行"></a>3.请求空行</h3><p>空行         //分割请求头和请求体</p>
+<h3 id="4-请求体（GET方式没有请求体，POST方式才有请求体）"><a href="#4-请求体（GET方式没有请求体，POST方式才有请求体）" class="headerlink" title="4.请求体（GET方式没有请求体，POST方式才有请求体）"></a>4.请求体（GET方式没有请求体，POST方式才有请求体）</h3><p>封装POST请求消息的请求参数的</p>
+<p>username=zfc</p>
+<h2 id="4-HTTP的响应报文格式"><a href="#4-HTTP的响应报文格式" class="headerlink" title="4.HTTP的响应报文格式"></a>4.HTTP的响应报文格式</h2><p>HTTP/2.0 200 OK</p>
+<p>Content-Type:text/html;charset=UTF-8</p>
+<p>Content-Length:101</p>
+<p>Date:Wed,06,Jun 2018 07:08:42 GMT</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;body&gt;&lt;&#x2F;body&gt;</span><br><span class="line">	&lt;&#x2F;head&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-响应行"><a href="#1-响应行" class="headerlink" title="1.响应行"></a>1.响应行</h3><p>组成：协议/版本  响应状态码  状态码描述</p>
+<p>响应状态码：服务器告诉客户端浏览器本次请求和响应的一个状态，都是三位数</p>
+<h3 id="2-响应头"><a href="#2-响应头" class="headerlink" title="2.响应头"></a>2.响应头</h3><p>格式：头名称：值</p>
+<h3 id="3-响应空行"><a href="#3-响应空行" class="headerlink" title="3.响应空行"></a>3.响应空行</h3><h3 id="4-响应体"><a href="#4-响应体" class="headerlink" title="4.响应体"></a>4.响应体</h3><h2 id="5-HTTP的响应状态码"><a href="#5-HTTP的响应状态码" class="headerlink" title="5.HTTP的响应状态码"></a>5.HTTP的响应状态码</h2><h3 id="1-1xx-服务器接收客户端消息，但没有接收完成"><a href="#1-1xx-服务器接收客户端消息，但没有接收完成" class="headerlink" title="1.1xx:服务器接收客户端消息，但没有接收完成"></a>1.1xx:服务器接收客户端消息，但没有接收完成</h3><p>100：客户端应当继续发送请求的剩余部分</p>
+<p>101：通知客户端转换HTTP协议版本</p>
+<h3 id="2-2xx-请求发送成功"><a href="#2-2xx-请求发送成功" class="headerlink" title="2.2xx:请求发送成功"></a>2.2xx:请求发送成功</h3><p>200：OK，请求成功</p>
+<h3 id="3-3xx-重定向"><a href="#3-3xx-重定向" class="headerlink" title="3.3xx:重定向"></a>3.3xx:重定向</h3><p>301：永久重定向，被请求资源永久移动到新位置</p>
+<p>302：临时重定向，被请求资源临时移动到新位置</p>
+<p>304：not modified请求资源没有改变，可以继续使用缓存</p>
+<h3 id="4-4xx-客户端错误"><a href="#4-4xx-客户端错误" class="headerlink" title="4.4xx:客户端错误"></a>4.4xx:客户端错误</h3><p>400：bad request语法错误</p>
+<p>401:unauthonized未认证</p>
+<p>403:forbidden禁止访问</p>
+<p>404：not found资源未找到</p>
+<h3 id="5-5xx：服务器端错误，服务器内部出现问题"><a href="#5-5xx：服务器端错误，服务器内部出现问题" class="headerlink" title="5.5xx：服务器端错误，服务器内部出现问题"></a>5.5xx：服务器端错误，服务器内部出现问题</h3><p>500：internal server error:内部服务器故障</p>
+<p>503：service unavailiable服务器繁忙</p>
+<p>505：HTTP version not supported   HTTP版本不支持</p>
+<h2 id="6-HTTP的常见请求方式"><a href="#6-HTTP的常见请求方式" class="headerlink" title="6.HTTP的常见请求方式"></a>6.HTTP的常见请求方式</h2><p>总共有8中，常见有两种：</p>
+<p>GET:请求参数在请求行中，在url后面，请求的url长度有限制，不太安全</p>
+<p>POST:请求参数在请求体中，请求的url长度没有限制，相对安全</p>
+<p>HEAD：与GET方法一样，都是向服务器发出指定资源的请求，只不过服务器不必传输响应体中的内容，就可以获取响应消息头中的信息。</p>
+<p>PUT:向服务器的指定资源位置上上传最新内容</p>
+<p>DELETE:请求删除服务器上的某些资源</p>
+<p>TRACE:回写服务器收到的请求，主要用于诊断或测试</p>
+<p>OPTIONS:返回服务器针对特定资源所支持的HTTP请求方法，也可以通过向web服务器发送*的请求来测试服务器的功能</p>
+<p>CONNECT:预留给能够将连接改为管道方式的代理服务器，通常用于SSL加密服务器的链接</p>
+<h2 id="7-HTTP的长连接短连接"><a href="#7-HTTP的长连接短连接" class="headerlink" title="7.HTTP的长连接短连接"></a>7.HTTP的长连接短连接</h2><p>请求头部字段connect：close则为短链接，传送完一次信息后就会断开连接</p>
+<p>请求头部字段connect：keep-alive则为长连接，传送完一次信息后可以继续传送，直到超时断连</p>
+<h2 id="8-转发和重定向"><a href="#8-转发和重定向" class="headerlink" title="8.转发和重定向"></a>8.转发和重定向</h2><p><strong>转发：</strong>服务器端进行页面跳转，仅限于内部资源跳转</p>
+<p><strong>转发语句：</strong>request.getRequestDispatcher(“/地址”).forward(request, response);</p>
+<p><strong>转发的特点：</strong></p>
+<ol>
+<li>地址栏不发生变化，显示的是上一个页面的地址</li>
+<li>请求次数：只有1次请求</li>
+<li>请求域中数据不会丢失</li>
+</ol>
+<p><strong>重定向：</strong>由客户端进行的页面跳转</p>
+<p><strong>重定向语句：</strong>response.sendRedirect(“要重定向的地址”)</p>
+<p><strong>重定向的特点</strong>：</p>
+<ol>
+<li>地址栏：显示新的地址</li>
+<li>请求次数：2次</li>
+<li>请求域中的数据会丢失，因为是2次请求</li>
+</ol>
+<p><strong>使用场景：</strong></p>
+<p>1.需要保留请求域中数据，使用转发，不需要保留，则使用重定向</p>
+<p>2.操作数据库时，增删改采用重定向，查询采用转发</p>
+<p>3.无论重定向还是转发，后续代码都会执行</p>
+<h1 id="HTTPS协议"><a href="#HTTPS协议" class="headerlink" title="HTTPS协议"></a>HTTPS协议</h1><h2 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h2><p>相当于由于HTTP协议+SSL/TLS协议，HTTP是明文传输，安全性比较低，HTTPS是在HTTP的基础上进行加密，然后传输密文</p>
+<h2 id="2-密码学"><a href="#2-密码学" class="headerlink" title="2.密码学"></a>2.密码学</h2><ol>
+<li><p>对称加密：也叫做私钥加密，信息的发送方和接收方使用同一个密钥加密解密，速度快，适合大数据。</p>
+</li>
+<li><p>非对称加密：也叫做公钥加密，同时使用私钥和公钥，私钥自己保存，公钥公开，使用其中一个进行加密，另一个进行解密，花费时间长，速度慢，只适合对少量数据进行加密。</p>
+</li>
+<li><p>SSL(secure sockets layer)：安全套接层协议，是为网络通信提供安全及数据完整性的一种协议。</p>
+</li>
+<li><p>TLS（transport layer security）：安全传输层协议，与SSL加密算法不一致，作用差不多</p>
+</li>
+<li><p>数字证书：主要包含证书发布机构，证书有效期，公钥，证书所有者，签名使用的算法，指纹以及指纹算法。数字证书可以保证里面的公钥一定是证书持有者的。</p>
+</li>
+<li><p>HTTPS为了兼顾安全和效率：对数据进行对称加密，对所要使用的密钥通过非对称加密传输。</p>
+</li>
+</ol>
+<h2 id="3-HTTPS的实现流程"><a href="#3-HTTPS的实现流程" class="headerlink" title="3.HTTPS的实现流程"></a>3.HTTPS的实现流程</h2><p>实际上包含了两次HTTP传输：</p>
+<p>1.客户端向服务端发起HTTPS请求，连接到服务器的443端口。</p>
+<p>2.服务端把自己的信息以数字证书的形式返回给客户端（证书内容有密钥公钥，网站地址，证书颁发机构，失效日期等），证书中有一个公钥来加密信息，私钥由服务器持有。</p>
+<p>3.客户端收到服务器端的证书之后，会对证书进行检查（证书中包含的地址与正在访问的地址是否一致，证书是否过期），如果证书合法，则获取公钥，并产生一个随机值作为客户端的密钥，则第一次HTTP请求完成。</p>
+<p>4.客户端发起第二个HTTP请求，客户端生成一个对称加密的算法和对应密钥，以公钥加密之后发送给服务器。</p>
+<p>5.之后客户端与服务端就可以用这个对称加密算法来加密解密通信内容了。</p>
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>协议</tag>
+      </tags>
+  </entry>
+</search>
