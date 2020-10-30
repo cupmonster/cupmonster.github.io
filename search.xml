@@ -54,10 +54,10 @@
 <p>​    3.同时让当前结点的next指针指向null，从而实现链表的局部反转</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span></span>&#123;<span class="comment">//函数功能，返回反转链表的头结点</span></span><br><span class="line">    <span class="keyword">if</span>(head==<span class="keyword">null</span>||head.next==<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">    ListNode newHead=reverseList(head.next);</span><br><span class="line">    head.next.next=head;</span><br><span class="line">    head.next=<span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">return</span> newHead;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://github.com/cupmonster/cupmonster.github.io/blob/main/images/1602312993501.png" style="float:left"></img></p>
+<p><img src="/.io//blog\source_posts\深入浅出理解递归\1.png"></p>
 <h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>1.求解递归问题的时候，一定不要深入函数内部去细想，不然搞来搞去就把自己搞凌乱了，我们只需要关注一层递归就好。</p>
 <p>2.用递归求解问题的时候，可能会重复计算冗余的子问题，这个时候不进行优化的话，效率就提升不上去。</p>
-<p><img src="https://github.com/cupmonster/cupmonster.github.io/blob/main/images/1602313561856.png" style="float:left"></img></p>
+<p><img src="/.io//blog\source_posts\深入浅出理解递归\2.png"></p>
 ]]></content>
       <categories>
         <category>算法</category>
